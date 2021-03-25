@@ -8,11 +8,14 @@ class Repository {
     return user;
   }
   findById(id) {
-    const user = this.users.find((user) => user.getId() === id);
+    const user = this.users.find((user) => user.getId() == id);
     if (!user) {
       throw new Error("Usuario no encontrado");
     }
     return user;
+  }
+  getAll() {
+    return this.users;
   }
   removeUser(user) {
     const indexOfUser = this.users.findIndex((u) => u.getId() === user.getId());

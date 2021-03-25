@@ -38,6 +38,13 @@ class Service {
       throw new Error(error.message);
     }
   }
+  getAllUsers() {
+    try {
+      return this.userRepository.getAll();
+    } catch (error) {
+      throw new Error(error.message)
+    }
+  }
 }
 
 module.exports = Service;
