@@ -27,6 +27,14 @@ app.get("/user/:id", (req, res) => {
   }
 });
 
+app.get("/user", (req, res) => {
+  try {
+    const users = usersService.getAllUsers();
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(400).json(error.message);
+  }
+});
 //app.use(express.static(__dirname))
 
 app.listen(port, () => {
