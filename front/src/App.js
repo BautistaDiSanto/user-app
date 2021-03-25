@@ -10,6 +10,7 @@ function App() {
   const [direccion, setDireccion] = React.useState("hola");
   const [tarjeta, setTarjeta] = React.useState("hola");
   const hanldeOnSubmit = async () => {
+    setError("")
     const user = {
       mail,
       nombre,
@@ -18,16 +19,22 @@ function App() {
       direccion,
       tarjetaCredito: tarjeta,
     };
-    const response = await fetch(`${URL}/user`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify(user)
-    });
-    console.log(JSON.stringify(user));
-    console.log(response);
+    try {
+      const response = await fetch(`${URL}/user`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(user)
+      });
+      if (!response.ok) {
+        const errMessage = await response.text()
+        setError(errMessage);
+      }
+    } catch (error) {
+     setError(error.message) 
+    }
   };
   return (
     <div>
