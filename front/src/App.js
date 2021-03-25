@@ -20,12 +20,11 @@ function App() {
     };
     const response = await fetch(`${URL}/user`, {
       method: "POST",
-      mode: "no-cors",
       headers: {
-        "Content-Type": "application/json",
+        "content-type": "application/json",
+        'Accept': 'application/json'
       },
-      body:
-        '{"mail":"carlos","nombre":"carl0os","apellido":"carlos","edad":"21654","direccion":"6541654","tarjetaCredito":"65416541"}',
+      body: JSON.stringify(user)
     });
     console.log(JSON.stringify(user));
     console.log(response);
@@ -33,50 +32,52 @@ function App() {
   return (
     <div>
       <div>
-        <p>mail</p>
-        <input
-          value={mail}
-          onChange={(e) => {
-            setMail(e.target.value);
-          }}
-        ></input>
-        <p>nombre</p>
-        <input
-          value={nombre}
-          onChange={(e) => {
-            setNombre(e.target.value);
-          }}
-        ></input>
-        <p>apellido</p>
-        <input
-          value={apellido}
-          onChange={(e) => {
-            setApellido(e.target.value);
-          }}
-        ></input>
-        <p>edad</p>
-        <input
-          value={edad}
-          onChange={(e) => {
-            setEdad(e.target.value);
-          }}
-        ></input>
-        <p>direccion</p>
-        <input
-          value={direccion}
-          onChange={(e) => {
-            setDireccion(e.target.value);
-          }}
-        ></input>
-        <p>tarjeta de credito</p>
-        <input
-          value={tarjeta}
-          onChange={(e) => {
-            setTarjeta(e.target.value);
-          }}
-        ></input>
-        <button onClick={hanldeOnSubmit}>submit</button>
-        {error && <div>{error}</div>}
+        <form onSubmit={e => e.preventDefault()}>
+          <p>mail</p>
+          <input
+            value={mail}
+            onChange={(e) => {
+              setMail(e.target.value);
+            }}
+            ></input>
+          <p>nombre</p>
+          <input
+            value={nombre}
+            onChange={(e) => {
+              setNombre(e.target.value);
+            }}
+            ></input>
+          <p>apellido</p>
+          <input
+            value={apellido}
+            onChange={(e) => {
+              setApellido(e.target.value);
+            }}
+            ></input>
+          <p>edad</p>
+          <input
+            value={edad}
+            onChange={(e) => {
+              setEdad(e.target.value);
+            }}
+            ></input>
+          <p>direccion</p>
+          <input
+            value={direccion}
+            onChange={(e) => {
+              setDireccion(e.target.value);
+            }}
+            ></input>
+          <p>tarjeta de credito</p>
+          <input
+            value={tarjeta}
+            onChange={(e) => {
+              setTarjeta(e.target.value);
+            }}
+            ></input>
+          <button onClick={hanldeOnSubmit}>submit</button>
+          {error && <div>{error}</div>}
+        </form>
       </div>
     </div>
   );
