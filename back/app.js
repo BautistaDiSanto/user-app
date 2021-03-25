@@ -1,14 +1,16 @@
-const Service = require("./modules/user/Service.js");
-
 const express = require("express");
-const usersService = new Service();
 const app = express();
-app.use(express.json());
+const Service = require("./modules/user/Service.js");
+var cors = require('cors')
+
+const usersService = new Service();
 const port = 3000;
+
+app.use(express.json());
+app.use(cors())
 
 app.post("/user", (req, res) => {
   try {
-    console.log(req);
     const user = usersService.createUser(req.body);
     res.status(200).json(user);
   } catch (error) {
