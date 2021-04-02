@@ -1,6 +1,8 @@
 const User = require("./User.js");
 const Repository = require("./Repository.js");
 
+const Users = require('../../models/User.js')
+
 const validateUser = (body) => {
   if (!body.nombre) throw new Error("nombre property missing");
   if (!body.apellido) throw new Error("apellido property missing");
@@ -14,7 +16,10 @@ class Service {
   constructor() {
     this.userRepository = new Repository();
   }
-
+  async test({firstName, lastName}) {
+    const user = await Users.create({ firstName, lastName });
+    return user
+  }
   createUser(body) {
     try {
       validateUser(body);
